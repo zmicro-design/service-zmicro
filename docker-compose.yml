@@ -5,14 +5,29 @@ services:
     restart: always
     image: whatwewant/zmicro:${SERVICE_ZMICRO_IMAGE_VERSION}
     ports:
-      - 0.0.0.0:${SERVICE_ZMICRO_PORT}:8024
-    command: zmicro gzterminal server --username \$SERVICE_ZMICRO_USERNAME --password \$SERVICE_ZMICRO_PASSWORD
+      - 0.0.0.0:${SERVICE_ZMICRO_PORT}:${SERVICE_ZMICRO_PORT}
+    command: gzterminal server --port $SERVICE_ZMICRO_PORT --username $SERVICE_ZMICRO_USERNAME --password $SERVICE_ZMICRO_PASSWORD
     environment:
-      PORT: 8024
+      PORT: $SERVICE_ZMICRO_PORT
       USERNAME: ${SERVICE_ZMICRO_USERNAME}
       PASSWORD: ${SERVICE_ZMICRO_PASSWORD}
     volumes:
-      - ${SERVICE_ZMICRO_HOME}:/usr/local/lib/zmicro
+      # - ${SERVICE_ZMICRO_HOME}/plugins:/usr/local/lib/zmicro/plugins
+      # # exclude built int plugins
+      # - /usr/local/lib/zmicro/plugins/core-utils
+      # - /usr/local/lib/zmicro/plugins/metadata
+      # - /usr/local/lib/zmicro/plugins/service
+      # - /usr/local/lib/zmicro/plugins/package
+      # - /usr/local/lib/zmicro/plugins/machine
+      # - /usr/local/lib/zmicro/plugins/daemon
+      # - /usr/local/lib/zmicro/plugins/cron
+      # - /usr/local/lib/zmicro/plugins/workspace
+      # - /usr/local/lib/zmicro/plugins/project
+      # - /usr/local/lib/zmicro/plugins/template
+      # # 
+      # mount services in
+      - ${SERVICE_ZMICRO_HOME}/plugins/service/services:/usr/local/lib/zmicro/plugins/service/services
+      #
       - ${SERVICE_ZMICRO_DATA_HOME}:/data
       - ${SERVICE_ZMICRO_CONFIGS_HOME}:/configs
       
