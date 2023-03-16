@@ -3,7 +3,7 @@ version: '3.7'
 services:
 
   zmicro:
-    image: whatwewant/registry:${SERVICE_ZMICRO_IMAGE_VERSION}
+    image: whatwewant/zmicro:${SERVICE_ZMICRO_IMAGE_VERSION}
     environment:
       USERNAME: ${SERVICE_ZMICRO_USERNAME}
       PASSWORD: ${SERVICE_ZMICRO_PASSWORD}
