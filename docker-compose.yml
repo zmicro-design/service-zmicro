@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  zmicro:
+    restart: always
+    image: whatwewant/zmicro:${SERVICE_ZMICRO_IMAGE_VERSION}
+    ports:
+      - 0.0.0.0:${SERVICE_ZMICRO_PORT}:8024
+    command: zmicro gzterminal server --username \$SERVICE_ZMICRO_USERNAME --password \$SERVICE_ZMICRO_PASSWORD
+    environment:
+      PORT: 8024
+      USERNAME: ${SERVICE_ZMICRO_USERNAME}
+      PASSWORD: ${SERVICE_ZMICRO_PASSWORD}
+      
+networks:
+  default:
+    external: true
+    name: compose-ingress
