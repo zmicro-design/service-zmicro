@@ -30,6 +30,9 @@ services:
       #
       - ${SERVICE_ZMICRO_DATA_HOME}:/data
       - ${SERVICE_ZMICRO_CONFIGS_HOME}:/configs
+      # Docker
+      - /var/run/docker.sock:/var/run/docker.sock
+
       
 networks:
   default:
