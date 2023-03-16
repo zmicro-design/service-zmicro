@@ -11,6 +11,9 @@ services:
       PORT: 8024
       USERNAME: ${SERVICE_ZMICRO_USERNAME}
       PASSWORD: ${SERVICE_ZMICRO_PASSWORD}
+    volumes:
+      - ${SERVICE_ZMICRO_HOME}:/usr/local/lib/zmicro
+      - ${SERVICE_ZMICRO_DATA_HOME}:/data
       
 networks:
   default:
